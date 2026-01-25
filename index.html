@@ -20,6 +20,8 @@
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
+html { scroll-behavior: smooth; }
+
 body{
   font-family: "Poppins", system-ui, sans-serif;
   background: var(--light);
@@ -217,16 +219,16 @@ footer{
   <div class="nav">
     <div class="logo">Hussain Medicare</div>
     <div>
-      <a href="#">Home</a>
-      <a href="#">Services</a>
-      <a href="#">Tests</a>
-      <a href="#">Contact</a>
+      <a href="#home">Home</a>
+      <a href="#services">Services</a>
+      <a href="#tests">Tests</a>
+      <a href="#contact">Contact</a>
       <a href="#book" class="btn">Book Now</a>
     </div>
   </div>
 </header>
 
-<section class="hero">
+<section class="hero" id="home">
   <div class="hero-inner">
     <div>
       <h1>Medical Services <span>At Your Home</span></h1>
@@ -237,28 +239,28 @@ footer{
   </div>
 </section>
 
-<section class="section">
+<section class="section" id="tests">
   <div class="container">
     <div class="section-title">
-      <h2>Our <span>Services</span></h2>
+      <h2>Available <span>Tests</span></h2>
     </div>
 
     <div class="services">
       <div class="card">
-        <h3>Blood Tests</h3>
-        <p>Home sample collection with fast & accurate reports.</p>
+        <h3>CBC (Complete Blood Count)</h3>
+        <p>Basic blood health check.</p>
       </div>
       <div class="card">
-        <h3>Injections</h3>
-        <p>All prescribed injections administered safely.</p>
+        <h3>Blood Sugar (Fasting/PP)</h3>
+        <p>Diabetes monitoring test.</p>
       </div>
       <div class="card">
-        <h3>Vaccinations</h3>
-        <p>Essential vaccines including flu & hepatitis.</p>
+        <h3>Thyroid (TSH)</h3>
+        <p>Thyroid function screening.</p>
       </div>
       <div class="card">
-        <h3>Home Nursing</h3>
-        <p>Professional nursing care at your doorstep.</p>
+        <h3>Lipid Profile</h3>
+        <p>Cholesterol & heart risk test.</p>
       </div>
     </div>
   </div>
@@ -347,7 +349,7 @@ footer{
 <!-- FLOATING BUTTONS -->
 <div class="floating">
   <a href="#book" class="float-btn">Book Now</a>
-  <a href="#" class="float-btn whatsapp">WhatsApp</a>
+  <a href="https://wa.me/919354541399" target="_blank" class="float-btn whatsapp">WhatsApp</a>
 </div>
 
 <script>
@@ -381,7 +383,7 @@ footer{
         resultMsg.style.color = "green";
         resultMsg.style.background = "#eaffea";
         resultMsg.style.border = "1px solid #b6f2b6";
-        resultMsg.innerText ="✅ Booking received successfulOur team will contact you shortly. For faster assistance, please WhatsApp us at +91 9354541399.";
+        resultMsg.innerText ="✅ Booking received successfully! Our team will contact you shortly. For faster assistance, please WhatsApp us at +91 9354541399.";
 
         form.reset();
       } else {
@@ -394,6 +396,20 @@ footer{
     }
   });
 </script>
+
+<section class="section" id="contact">
+  <div class="container">
+    <div class="section-title">
+      <h2>Contact <span>Us</span></h2>
+    </div>
+
+    <div class="card" style="text-align:center;">
+      <h3>Call / WhatsApp</h3>
+      <p style="margin:10px 0;">📞 <a href="tel:+919354541399" style="color:var(--red);font-weight:700;">+91 9354541399</a></p>
+      <p style="margin:10px 0;">💬 <a href="https://wa.me/919354541399" target="_blank" style="color:#25d366;font-weight:700;">Chat on WhatsApp</a></p>
+    </div>
+  </div>
+</section>
 
 </body>
 </html>
