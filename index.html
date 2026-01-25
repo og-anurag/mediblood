@@ -334,7 +334,7 @@ footer{
           Submit Booking
         </button>
 
-        <p id="resultMsg" style="text-align:center;font-weight:600;"></p>
+        <p id="resultMsg" style="text-align:center;font-weight:600;padding:12px;border-radius:10px;"></p>
       </form>
     </div>
   </div>
@@ -379,7 +379,10 @@ footer{
 
       if (out.ok) {
         resultMsg.style.color = "green";
-        resultMsg.innerText = "✅ Booking submitted successfully!";
+        resultMsg.style.background = "#eaffea";
+        resultMsg.style.border = "1px solid #b6f2b6";
+        resultMsg.innerText ="✅ Booking received successfulOur team will contact you shortly. For faster assistance, please WhatsApp us at +91 9354541399.";
+
         form.reset();
       } else {
         resultMsg.style.color = "red";
