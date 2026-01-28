@@ -398,6 +398,12 @@ footer{
         <input type="text" id="phone" placeholder="Phone Number" required
           style="padding:12px;border:1px solid #ddd;border-radius:10px;" />
 
+        <input type="date" id="date" required
+          style="padding:12px;border:1px solid #ddd;border-radius:10px;" />
+
+        <input type="time" id="time" required
+          style="padding:12px;border:1px solid #ddd;border-radius:10px;" />
+
         <input type="email" id="email" placeholder="Email (optional)"
           style="padding:12px;border:1px solid #ddd;border-radius:10px;" />
 
@@ -462,6 +468,8 @@ footer{
     const data = {
       name: document.getElementById("name").value,
       phone: document.getElementById("phone").value,
+      date: document.getElementById("date").value,
+      time: document.getElementById("time").value,
       email: document.getElementById("email").value,
       service: document.getElementById("service").value,
       address: document.getElementById("address").value,
