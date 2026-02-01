@@ -398,10 +398,13 @@ footer{
         <input type="text" id="phone" placeholder="Phone Number" required
           style="padding:12px;border:1px solid #ddd;border-radius:10px;" />
 
-        <input type="date" id="date" required
+        <input type="text" id="date" placeholder="📅 Select Date" required
+          onfocus="this.type='date'"
+          onchange="document.getElementById('time').focus()"
           style="padding:12px;border:1px solid #ddd;border-radius:10px;" />
 
-        <input type="time" id="time" required
+        <input type="text" id="time" placeholder="⏰ Select Time (AM/PM)" required
+          onfocus="this.type='time'"
           style="padding:12px;border:1px solid #ddd;border-radius:10px;" />
 
         <input type="email" id="email" placeholder="Email (optional)"
@@ -464,12 +467,22 @@ footer{
     e.preventDefault();
     resultMsg.style.color = "black";
     resultMsg.innerText = "Submitting...";
+    
+    function to12Hour(time) {
+      if (!time) return "";
+      let [h, m] = time.split(":");
+      h = parseInt(h);
+      const ampm = h >= 12 ? "PM" : "AM";
+      h = h % 12 || 12;
+      return `${h}:${m} ${ampm}`;
+    }
+
 
     const data = {
       name: document.getElementById("name").value,
       phone: document.getElementById("phone").value,
       date: document.getElementById("date").value,
-      time: document.getElementById("time").value,
+      time: to12Hour(document.getElementById("time").value),
       email: document.getElementById("email").value,
       service: document.getElementById("service").value,
       address: document.getElementById("address").value,
