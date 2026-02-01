@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <title>MediBlood | Medical Services at Home</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Book blood tests, injections, vaccinations and medical services at home.">
@@ -18,6 +19,17 @@
   --shadow:0 10px 30px rgba(0,0,0,0.08);
   --maxw:1200px;
 }
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease;
+}
+.fade-in.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 
 *{box-sizing:border-box;margin:0;padding:0}
 html { scroll-behavior: smooth; }
@@ -240,6 +252,9 @@ footer{
   </div>
 </section>
 
+<section class="section fade-in" id="services">
+
+
 <section class="section" id="services">
   <div class="container">
     <div class="section-title">
@@ -248,22 +263,22 @@ footer{
 
     <div class="services">
       <div class="card">
-        <h3>Blood Tests</h3>
+        <h3><i class="fa-solid fa-vial"></i> Blood Tests</h3>
         <p>Home sample collection with fast & accurate reports.</p>
       </div>
 
       <div class="card">
-        <h3>Injections</h3>
+        <h3><i class="fa-solid fa-syringe"></i> Injections</h3>
         <p>All prescribed injections administered safely.</p>
       </div>
 
       <div class="card">
-        <h3>Vaccinations</h3>
+        <h3><i class="fa-solid fa-shield-virus"></i> Vaccinations</h3>
         <p>Essential vaccines including flu & hepatitis.</p>
       </div>
 
       <div class="card">
-        <h3>Home Nursing</h3>
+        <h3><i class="fa-solid fa-user-nurse"></i> Home Nursing</h3>
         <p>Professional nursing care at your doorstep.</p>
       </div>
     </div>
@@ -430,6 +445,7 @@ footer{
         </button>
 
         <p id="resultMsg" style="text-align:center;font-weight:600;padding:12px;border-radius:10px;"></p>
+        
         <a id="waLink" href="#" target="_blank"
           style="display:none;margin-top:12px;text-align:center;
           background:#25d366;color:white;padding:12px 18px;
@@ -471,6 +487,10 @@ footer{
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
+    const btn = form.querySelector("button");
+    btn.innerText = "Submitting...";
+    btn.disabled = true;
+
     resultMsg.style.color = "black";
     resultMsg.innerText = "Submitting...";
     
@@ -505,6 +525,8 @@ footer{
       const out = await res.json();
 
       if (out.ok) {
+
+
         const waText =
         `New Booking 🩺
 
@@ -530,17 +552,53 @@ footer{
         resultMsg.style.border = "1px solid #b6f2b6";
         resultMsg.innerText ="✅ Booking received successfully! Our team will contact you shortly. For faster assistance, please WhatsApp us at +91 9354541399.";
 
+        const bookings =
+        JSON.parse(localStorage.getItem("medibloodBookings") || "[]");
+        
+        bookings.push({
+          name: data.name,
+          phone: data.phone,
+          service: data.service,
+          date: data.date,
+          time: data.time,
+          address: data.address,
+          message: data.message,
+        });
+        
+        localStorage.setItem("medibloodBookings", JSON.stringify(bookings));
+
+        btn.innerText = "Submit Booking";
+        btn.disabled = false;
+
         form.reset();
       } else {
+        btn.innerText = "submit Booking";
+        btn.disabled = false;
+        form.reset();
         document.getElementById("waLink").style.display = "none";
         resultMsg.style.color = "red";
         resultMsg.innerText = "❌ " + out.message;
+
       }
     } catch (err) {
+      btn.innerText = "Submit Booking";
+      btn.disabled = false;
       resultMsg.style.color = "red";
       resultMsg.innerText = "❌ Backend not running / CORS issue";
     }
   });
+</script>
+
+<script>
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("show");
+    }
+  });
+});
+
+document.querySelectorAll(".fade-in").forEach(sec => observer.observe(sec));
 </script>
 
 </body>
