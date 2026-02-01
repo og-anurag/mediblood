@@ -430,6 +430,12 @@ footer{
         </button>
 
         <p id="resultMsg" style="text-align:center;font-weight:600;padding:12px;border-radius:10px;"></p>
+        <a id="waLink" href="#" target="_blank"
+          style="display:none;margin-top:12px;text-align:center;
+          background:#25d366;color:white;padding:12px 18px;
+          border-radius:10px;font-weight:600;">
+          📲 Send details on WhatsApp
+        </a>
       </form>
     </div>
   </div>
@@ -499,6 +505,26 @@ footer{
       const out = await res.json();
 
       if (out.ok) {
+        const waText =
+        `New Booking 🩺
+
+        Name: ${data.name}
+        Phone: ${data.phone}
+        Service: ${data.service}
+        Date: ${data.date}
+        Time: ${data.time}
+        Address: ${data.address || "N/A"}
+        Message: ${data.message || "N/A"}
+        `;
+
+        const waUrl =
+          "https://wa.me/919354541399?text=" +
+          encodeURIComponent(waText);
+
+        const waLink = document.getElementById("waLink");
+        waLink.href = waUrl;
+        waLink.style.display = "block";
+
         resultMsg.style.color = "green";
         resultMsg.style.background = "#eaffea";
         resultMsg.style.border = "1px solid #b6f2b6";
@@ -506,6 +532,7 @@ footer{
 
         form.reset();
       } else {
+        document.getElementById("waLink").style.display = "none";
         resultMsg.style.color = "red";
         resultMsg.innerText = "❌ " + out.message;
       }
